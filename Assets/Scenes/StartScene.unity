@@ -999,6 +999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerHealth: {fileID: 9030332555483702488}
   _numberOfEnemies: {fileID: 9030332555180284749}
+  _player: {fileID: 1680896292}
 --- !u!1 &9030332555945056779
 GameObject:
   m_ObjectHideFlags: 0
