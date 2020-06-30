@@ -4,32 +4,58 @@ using UnityEngine;
 
 public class Zombie : MonoBehaviour
 {
-    //References
+    //Calculation Variables
     [SerializeField] private float _zombieSpeed = 1;
-    private Transform _player;
+    private float _distanceToStopFromPlayer = .5f;
+
+    //Custom classes Referece
     private FollowPlayer _zombie = new FollowPlayer();
-    private float distanceFromPlayer = .5f;
+    private NumberOfZombies _numberOfZombies = new NumberOfZombies();
+
+    //Reference to player
+    private Transform _player;
+    
 
     private void OnEnable()
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        _numberOfZombies.OnEnabled();
+    }
 
+    private void OnDisable()
+    {
+        _numberOfZombies.OnDisabled();
     }
 
     void Update()
     {
-        if (Vector2.Distance(transform.position,_player.position) > distanceFromPlayer)
+        _zombie.StopDistance(_player, transform, _distanceToStopFromPlayer, _zombieSpeed);
+    }
+}
+
+
+class FollowPlayer //Handles the following of the player and stoping at certain distance
+{
+    private Vector2 StartFollowing(Transform zombie, Transform player, float zombieSpeed)
+    {
+       Vector2 _follow = Vector2.MoveTowards(zombie.position, player.position, zombieSpeed * Time.deltaTime);
+        return _follow;
+    }
+
+    public void StopDistance(Transform player, Transform zombie, float distanceToStop, float zombieSpeed)
+    {
+        if (Vector2.Distance(zombie.position, player.position) > distanceToStop)
         {
-            transform.position = _zombie.StartFollowing(transform, _player, _zombieSpeed * Time.deltaTime);
+            zombie.position = StartFollowing(zombie, player, zombieSpeed);
         }
     }
 }
 
-class FollowPlayer //Handles the following of the player
+
+public class NumberOfZombies //Handles the number of enemies on scene. 
 {
-    public Vector3 StartFollowing(Transform zombie, Transform player, float zombieSpeed)
-    {
-       Vector3 _follow = Vector2.MoveTowards(zombie.position, player.position, zombieSpeed);
-        return _follow;
-    }
+    public readonly static List<NumberOfZombies> Enemies = new List<NumberOfZombies>();
+    public static int EnemiesInScene => Enemies.Count;
+    public void OnEnabled() => Enemies.Add(this);
+    public void OnDisabled() => Enemies.Remove(this);
 }
