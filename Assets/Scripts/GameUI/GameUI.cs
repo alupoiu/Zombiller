@@ -15,7 +15,8 @@ public class GameUI : MonoBehaviour
 
     void Update()
     {
-        _playerHealth.text = "Player HP: " + _player.health;
+        
+        _playerHealth.text = "Player HP: " + (_player != null ? _player.health + "" : "_player in GameUI is null"); //edit: checks to make sure the player isn't null when we update the player health text 
         _numberOfEnemies.text = "Enemies: " + NumberOfZombies.EnemiesInScene;
     }
 }
