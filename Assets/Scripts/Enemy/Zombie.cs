@@ -13,12 +13,11 @@ public class Zombie : MonoBehaviour
     private NumberOfZombies _numberOfZombies = new NumberOfZombies();
 
     //Reference to player
-    private Transform _player;
+    [SerializeField] private Transform _player;
     
 
     private void OnEnable()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         _numberOfZombies.OnEnabled();
     }
 

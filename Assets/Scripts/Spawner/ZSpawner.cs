@@ -7,23 +7,29 @@ public class ZSpawner : MonoBehaviour
 
     [Tooltip("Place the Zombie Prefab Here")]
     [SerializeField] private GameObject _zombie;
+    [SerializeField] private Transform pla;
 
     [Tooltip("The lower the Spawn Rate value, the fastest")]
     [SerializeField] private float _spawnRate = 1;
 
-    private float _spawnStartDelay = 1.5f;
+    //Claculation Variables
+    private int limitOfZombiesOnScene;
+    private bool spawnerIsActive = true;
 
-
-    void Start()
+    private void Start()
     {
-        InvokeRepeating("ZombieSpawner", _spawnStartDelay, _spawnRate);
+        StartCoroutine(Spawner());    
     }
 
-
-    void ZombieSpawner() //Instantiate object with is current x axis but random y axis 
+    IEnumerator Spawner()
     {
-        int ScreenCorner = 4;
-        Vector2 randomPositionY = new Vector2(transform.position.x, Random.Range(ScreenCorner, -ScreenCorner));
-        Instantiate(_zombie, randomPositionY, _zombie.transform.rotation);
+        while (spawnerIsActive)
+        {
+            yield return new WaitForSeconds(_spawnRate);
+            int ScreenSize = 4;
+            Vector2 randomPositionY = new Vector2(transform.position.x, Random.Range(ScreenSize, -ScreenSize));
+            Instantiate(_zombie, randomPositionY, _zombie.transform.rotation);
+        }
+        
     }
 }
