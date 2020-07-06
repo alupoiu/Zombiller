@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Ammo Crate
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Zombie : MonoBehaviour
@@ -14,7 +13,6 @@ public class Zombie : MonoBehaviour
 
     //Reference to player
     private Transform _player;
-
 
     private void Start()
     {
@@ -33,6 +31,15 @@ public class Zombie : MonoBehaviour
     void Update()
     {
         _zombie.StopDistance(_player, transform, _distanceToStopFromPlayer, _zombieSpeed);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
     }
 }
 
@@ -54,7 +61,9 @@ class FollowPlayer //Handles the following of the player and stoping at certain 
     }
 }
 
-
+/// <summary>
+/// Thulk Code
+/// </summary>
 public class NumberOfZombies //Handles the number of enemies on scene. 
 {
     public readonly static List<NumberOfZombies> Enemies = new List<NumberOfZombies>();

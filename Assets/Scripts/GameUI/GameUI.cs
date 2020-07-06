@@ -10,18 +10,13 @@ public class GameUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _numberOfEnemies;
     [SerializeField] private TextMeshProUGUI _playerAmmo;
 
-
-    [Header("Prefabs References")]
-    [SerializeField] private Health _player = new Health();
-
-    [Header("Ammo Reference")]
-    [SerializeField] private shooting ammo;
-    
+    [Header("Prefabs Reference")]
+    [SerializeField] private HealthComponent _player = new HealthComponent();
 
     void Update()
     {
-        _playerHealth.text = "Player HP: " + (_player != null ? _player.health + "" : "_player in GameUI is null"); //edit: checks to make sure the player isn't null when we update the player health text 
+        _playerHealth.text = "Player HP: " + (_player != null ? _player._health.Current + "" : "_player in GameUI is null"); //edit: checks to make sure the player isn't null when we update the player health text 
         _numberOfEnemies.text = "Enemies: " + NumberOfZombies.EnemiesInScene;
-        _playerAmmo.text = "Ammo: " + ammo.playerAmmo;
+        _playerAmmo.text = "Ammo: " + shooting.playerAmmo;
     }
 }

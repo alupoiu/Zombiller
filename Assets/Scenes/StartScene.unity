@@ -530,7 +530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1680896287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 341122712}
@@ -594,7 +594,6 @@ MonoBehaviour:
   bulletspeed: 15
   delay: 5
   rateOfRire: 1
-  playerAmmo: 10
 --- !u!114 &1680896292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,8 +606,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ded7b04b787bd34c9afac97323113b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  entity: {fileID: 1680896287}
+  maxHp: 100
+  hpRegeneratedPerSecond: 2
 --- !u!61 &1680896293
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -677,9 +676,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a6e3807674e7141911e2a699b936e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zombie: {fileID: 4052805874717739839, guid: 9d02ca5a9861fe2448c3e96e1be59710, type: 3}
-  pla: {fileID: 1680896288}
+  _prefab: {fileID: 4052805874717739839, guid: 9d02ca5a9861fe2448c3e96e1be59710, type: 3}
   _spawnRate: 5
+  _ScreenYLimit: 7
+  _ScreenXLimit: 16
 --- !u!1 &5985639437022279169
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,6 +690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5985639437022279171}
   - component: {fileID: 5985639437022279168}
+  - component: {fileID: 5985639437022279170}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -697,6 +698,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5985639437022279170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5985639437022279169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344a09b5d6ed0e04a810f2ccbb027142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 7735328959602088962, guid: b6c4e255fc6ccfd4e95b4ad6c0069a23, type: 3}
+  _spawnRate: 15
+  _ScreenYLimit: 4
+  _ScreenXLimit: 12
 --- !u!4 &5985639437022279171
 Transform:
   m_ObjectHideFlags: 0
@@ -705,7 +722,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5985639437022279169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.9, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -726,12 +743,12 @@ PrefabInstance:
     - target: {fileID: 7735328959602088974, guid: b6c4e255fc6ccfd4e95b4ad6c0069a23,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.85
+      value: 9.99
       objectReference: {fileID: 0}
     - target: {fileID: 7735328959602088974, guid: b6c4e255fc6ccfd4e95b4ad6c0069a23,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.24
+      value: 1.47
       objectReference: {fileID: 0}
     - target: {fileID: 7735328959602088974, guid: b6c4e255fc6ccfd4e95b4ad6c0069a23,
         type: 3}
@@ -1095,7 +1112,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -45.078644, w: 0}
+  m_margin: {x: 0, y: 0, z: -232.11646, w: 0}
   m_textInfo:
     textComponent: {fileID: 9030332555483702488}
     characterCount: 10
@@ -1257,7 +1274,6 @@ MonoBehaviour:
   _numberOfEnemies: {fileID: 9030332555180284749}
   _playerAmmo: {fileID: 1503660637}
   _player: {fileID: 1680896292}
-  ammo: {fileID: 1680896291}
 --- !u!1 &9030332555945056779
 GameObject:
   m_ObjectHideFlags: 0
