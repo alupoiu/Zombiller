@@ -11,13 +11,23 @@ public class shooting : MonoBehaviour
     public float bulletspeed = 15f;
     // Delay until bullet deletes
     public float delay = 5f;
+    //Time Between Shoots
+    [SerializeField] private float rateOfRire = .5f;
+    private float waitTime;
+    //Ammo Related 
+    public static int playerAmmo = 10;
 
     void Update()
     {
         // Shoot when fire button is pressed
         if (Input.GetButtonDown("Fire1"))
         {
-            Shoot();
+            if(waitTime < Time.time && playerAmmo > 0)
+            {
+                Shoot();
+                playerAmmo--;
+                waitTime = Time.time + rateOfRire;
+            }
         }
     }
 
